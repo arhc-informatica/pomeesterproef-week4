@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data uit database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('data') }}">Data</a></li>
+            <li><a href="{{ url_for('toevoegen') }}">Toevoegen</a></li>
+            <li><a href="{{ url_for('laad_basisdata') }}">Laad basisdata</a></li>
+        </ul>
+    </nav>
+
+    <h1>Data uit de database</h1>
+    <p>Overzicht van alle rijen in de tabel <code>items</code> (SELECT *).</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Beschrijving</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item['id'] }}</td>
+                <td>{{ item['naam'] }}</td>
+                <td>{{ item['beschrijving'] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Nog geen data. Klik op "Laad basisdata".</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
